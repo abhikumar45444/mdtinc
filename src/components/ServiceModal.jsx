@@ -62,7 +62,7 @@ export default function ServiceModal({
             </span>
             <h2
               id="service-modal-title"
-              className="text-xl md:text-2xl font-semibold tracking-tight text-white leading-tight"
+              className="font-serif text-2xl md:text-3xl font-normal tracking-tight text-white leading-tight"
             >
               {service.title}<span className="text-[#9E6B47]">.</span>
             </h2>

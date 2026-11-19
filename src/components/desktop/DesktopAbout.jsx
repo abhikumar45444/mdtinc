@@ -1,90 +1,59 @@
 import React from 'react';
 import Reveal from '../Reveal';
-import { STORY, COMPANY_INFO } from '../../data/mdtData';
+import { STORY } from '../../data/mdtData';
 
-export default function DesktopAbout({ onOpenProjectDrawer, onOpenCallModal }) {
-  const scrollTo = (id) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
-
+export default function DesktopAbout() {
   return (
-    <section className="bg-[#F8F7F4] dark:bg-[#181916] py-16 lg:py-24 border-b border-neutral-200 dark:border-neutral-800 transition-colors" id="story" aria-labelledby="story-title">
-      <div className="max-w-6xl mx-auto px-6 lg:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-          {/* Left: Craftsmanship Photo */}
+    <section id="story" className="w-full bg-[#F8F5EE] dark:bg-[#131211] py-20 sm:py-32 border-b border-[#E6DFD3] dark:border-[#242220] transition-colors">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          {/* Left Column: Team Photo */}
           <div className="lg:col-span-5">
-            <Reveal delay={120}>
-              <figure className="relative w-full h-[clamp(320px,36vw,480px)] overflow-hidden bg-neutral-200 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-800 rounded-sm group">
+            <Reveal delay={100}>
+              <div className="relative h-[420px] sm:h-[520px] w-full rounded-xs overflow-hidden bg-neutral-200 dark:bg-neutral-900 border border-[#E6DFD3] dark:border-[#242220] shadow-sm">
                 <img
-                  src="https://st.hzcdn.com/simgs/e8110886086b09c3_14-8183/home-design.jpg"
-                  alt="MDT Design + Build craftsmanship and historic home restoration in Riverside, CA"
-                  className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700 ease-out"
+                  src={STORY.teamImage}
+                  alt="MDT Design + Build Team: Martin, Domika, Ashlee, and Alexis"
+                  className="w-full h-full object-cover"
                   loading="lazy"
                 />
-                <figcaption className="absolute bottom-3 left-3 bg-white/95 dark:bg-[#121311]/95 border border-neutral-200 dark:border-neutral-800 px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-neutral-800 dark:text-neutral-200 rounded-xs">
-                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#9E6B47] mr-2"></span>
-                  FOUNDER: MARTIN MEJIA &amp; THE MEJIA TEAM
-                </figcaption>
-              </figure>
+                <div className="absolute bottom-4 left-4 bg-black/60 backdrop-blur-xs text-white font-mono text-[10px] uppercase tracking-wider px-3 py-1.5 rounded-xs">
+                  FOUNDED IN RIVERSIDE, CA
+                </div>
+              </div>
             </Reveal>
           </div>
 
-          {/* Right: Editorial Story */}
-          <div className="lg:col-span-7 space-y-6">
-            <div>
-              <Reveal delay={0}>
-                <p className="text-[11px] font-mono uppercase tracking-[0.14em] text-neutral-500 dark:text-neutral-400">
-                  OUR STORY
-                </p>
-              </Reveal>
-              <Reveal delay={80}>
-                <h2
-                  id="story-title"
-                  className="text-3xl lg:text-4xl font-semibold tracking-tight text-neutral-950 dark:text-white mt-2"
-                >
-                  {STORY.headline}<span className="text-[#9E6B47]">.</span>
-                </h2>
-              </Reveal>
-            </div>
+          {/* Right Column: Narrative */}
+          <div className="lg:col-span-7 space-y-8">
+            <Reveal delay={0}>
+              <p className="text-[11px] font-mono uppercase tracking-[0.22em] text-[#A0633B] dark:text-[#C98858] mb-3">
+                OUR STORY
+              </p>
+              <h2 className="font-serif text-3xl sm:text-5xl font-normal tracking-tight text-[#191816] dark:text-[#EFECE6] leading-[1.12]">
+                {STORY.tagline}
+              </h2>
+            </Reveal>
 
-            <Reveal delay={140} className="space-y-3.5 text-[15px] text-neutral-600 dark:text-neutral-300 leading-relaxed">
-              {STORY.paragraphs.map((p, idx) => (
-                <p key={idx}>{p}</p>
+            <Reveal delay={100} className="space-y-4 text-sm sm:text-base text-neutral-600 dark:text-neutral-300 font-sans font-light leading-relaxed">
+              {STORY.paragraphs.map((para, idx) => (
+                <p key={idx}>{para}</p>
               ))}
             </Reveal>
 
-            {/* Clean Monospace Metric Strip */}
+            {/* Credential Grid */}
             <Reveal delay={200}>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 border-y border-neutral-200 dark:border-neutral-800 py-4 font-mono text-xs text-neutral-950 dark:text-white">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-6 border-t border-[#E6DFD3] dark:border-[#242220] font-mono text-xs">
                 {STORY.stats.map((s, idx) => (
-                  <div key={idx}>
-                    <span className="text-xl sm:text-2xl font-semibold block text-[#9E6B47]">
+                  <div key={idx} className="space-y-1">
+                    <span className="font-semibold text-[#191816] dark:text-[#EFECE6] block font-sans text-sm">
                       {s.value}
                     </span>
-                    <span className="text-neutral-500 dark:text-neutral-400 text-[10px] uppercase tracking-wider">
+                    <span className="text-[10px] uppercase text-neutral-500 dark:text-neutral-400">
                       {s.label}
                     </span>
                   </div>
                 ))}
-              </div>
-            </Reveal>
-
-            <Reveal delay={260}>
-              <div className="pt-1 flex flex-wrap items-center gap-6">
-                <button
-                  onClick={() => scrollTo('contact')}
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-neutral-950 dark:text-white border-b border-neutral-950 dark:border-white pb-0.5 hover:text-[#9E6B47] hover:border-[#9E6B47] transition-colors cursor-pointer"
-                >
-                  <span>Connect with our builders</span>
-                  <span aria-hidden="true">↘</span>
-                </button>
-                <button
-                  onClick={onOpenCallModal}
-                  className="font-mono text-xs text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white transition-colors cursor-pointer"
-                >
-                  Call office: {COMPANY_INFO.phone}
-                </button>
               </div>
             </Reveal>
           </div>

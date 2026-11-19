@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Plus, Minus } from 'lucide-react';
 import Reveal from '../Reveal';
 import { FAQS } from '../../data/mdtData';
 
@@ -10,62 +11,44 @@ export default function DesktopFaq() {
   };
 
   return (
-    <section className="bg-[#FFFFFF] dark:bg-[#121311] py-16 lg:py-24 border-b border-neutral-200 dark:border-neutral-800 transition-colors" id="faq" aria-labelledby="faq-title">
-      <div className="max-w-6xl mx-auto px-6 lg:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
-          {/* Left Column Heading */}
+    <section className="w-full bg-[#F8F5EE] dark:bg-[#131211] py-20 sm:py-32 border-b border-[#E6DFD3] dark:border-[#242220] transition-colors">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           <div className="lg:col-span-4">
             <Reveal delay={0}>
-              <p className="text-[11px] font-mono uppercase tracking-[0.14em] text-neutral-500 dark:text-neutral-400">
-                COMMON QUESTIONS
+              <p className="text-[11px] font-mono uppercase tracking-[0.22em] text-[#A0633B] dark:text-[#C98858] mb-3">
+                QUESTIONS
               </p>
-            </Reveal>
-            <Reveal delay={80}>
-              <h2
-                id="faq-title"
-                className="text-3xl lg:text-4xl font-semibold tracking-tight text-neutral-950 dark:text-white mt-2 leading-tight"
-              >
-                Good to know before you build<span className="text-[#9E6B47]">.</span>
+              <h2 className="font-serif text-3xl sm:text-5xl font-normal tracking-tight text-[#191816] dark:text-[#EFECE6]">
+                Good to know<span className="text-[#A0633B]">.</span>
               </h2>
-            </Reveal>
-            <Reveal delay={140}>
-              <p className="text-sm text-neutral-600 dark:text-neutral-300 mt-4 leading-relaxed font-sans">
-                Clear answers regarding city permitting, architectural coordination, and construction budgets across Southern California.
-              </p>
             </Reveal>
           </div>
 
-          {/* Right Column Accordion Stack */}
-          <div className="lg:col-span-8 divide-y divide-neutral-200 dark:divide-neutral-800 border-y border-neutral-200 dark:border-neutral-800">
+          <div className="lg:col-span-8 divide-y divide-[#E6DFD3] dark:divide-[#242220] border-y border-[#E6DFD3] dark:border-[#242220]">
             {FAQS.map((faq, index) => {
               const isOpen = openIndex === index;
               return (
-                <Reveal key={index} delay={index * 60}>
-                  <div className="py-4">
-                    <button
-                      onClick={() => toggle(index)}
-                      className="w-full flex items-center justify-between text-left group cursor-pointer"
-                    >
-                      <span className={`text-base font-semibold tracking-tight transition-colors ${
-                        isOpen
-                          ? 'text-[#9E6B47]'
-                          : 'text-neutral-950 dark:text-white group-hover:text-[#9E6B47]'
-                      }`}>
-                        {faq.q}
-                      </span>
-                      <span className="font-mono text-xl text-neutral-400 group-hover:text-neutral-950 dark:group-hover:text-white transition-colors leading-none pl-4">
-                        {isOpen ? '−' : '+'}
-                      </span>
-                    </button>
-                    {isOpen && (
-                      <div className="pt-3 pr-6 animate-fade-in">
-                        <p className="text-[15px] text-neutral-600 dark:text-neutral-300 leading-relaxed font-sans">
-                          {faq.a}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                </Reveal>
+                <div key={index} className="py-5">
+                  <button
+                    onClick={() => toggle(index)}
+                    className="w-full flex items-center justify-between text-left group cursor-pointer"
+                  >
+                    <span className="font-serif text-xl font-normal text-[#191816] dark:text-[#EFECE6] group-hover:text-[#A0633B] dark:group-hover:text-[#C98858] transition-colors">
+                      {faq.q}
+                    </span>
+                    <span className="text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-white transition-colors ml-4">
+                      {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                    </span>
+                  </button>
+                  {isOpen && (
+                    <div className="pt-3 pr-6 animate-fade-in">
+                      <p className="font-sans text-sm text-neutral-600 dark:text-neutral-400 font-light leading-relaxed">
+                        {faq.a}
+                      </p>
+                    </div>
+                  )}
+                </div>
               );
             })}
           </div>

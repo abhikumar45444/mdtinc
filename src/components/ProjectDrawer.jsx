@@ -119,7 +119,7 @@ export default function ProjectDrawer({
             </p>
             <h2
               id="project-drawer-title"
-              className="text-xl font-semibold tracking-tight text-neutral-950 dark:text-white mt-1"
+              className="font-serif text-2xl font-normal tracking-tight text-neutral-950 dark:text-white mt-1"
             >
               Tell us about your home<span className="text-[#9E6B47]">.</span>
             </h2>
@@ -147,7 +147,7 @@ export default function ProjectDrawer({
               </div>
 
               <div>
-                <h3 className="text-xl font-semibold tracking-tight text-neutral-950 dark:text-white">
+                <h3 className="font-serif text-2xl font-normal tracking-tight text-neutral-950 dark:text-white">
                   Project details received<span className="text-[#9E6B47]">.</span>
                 </h3>
                 <p className="text-sm text-neutral-600 dark:text-neutral-300 mt-2 leading-relaxed">

@@ -1,39 +1,36 @@
-import React from 'react';
-import { Sun, Moon } from 'lucide-react';
-import { COMPANY_INFO } from '../../data/mdtData';
+import React, { useState } from 'react';
+import { Sun, Moon, Menu, X, ArrowUpRight } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 
-export default function DesktopNavbar({
-  onOpenProjectDrawer,
-  onOpenCallModal,
-  onOpenAreaModal,
-  selectedArea
-}) {
+export default function DesktopNavbar({ onOpenProjectDrawer }) {
   const { theme, toggleTheme } = useTheme();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const scrollTo = (id) => {
+    setMobileMenuOpen(false);
     const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <header className="h-16 border-b border-neutral-200 dark:border-neutral-800 bg-white/95 dark:bg-[#121311]/95 backdrop-blur-sm sticky top-0 z-40 transition-colors">
-      <div className="max-w-6xl mx-auto px-6 lg:px-10 h-full flex items-center justify-between">
-        {/* Left: Clean Brand Wordmark */}
+    <header className="sticky top-0 z-40 w-full bg-[#F8F5EE]/95 dark:bg-[#131211]/95 backdrop-blur-md border-b border-[#E6DFD3] dark:border-[#242220] transition-colors">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
+        {/* Architectural Studio Wordmark */}
         <a
           href="#"
-          className="flex items-center gap-3 text-neutral-950 dark:text-white font-semibold text-base tracking-tight hover:opacity-85 transition-opacity"
+          className="flex flex-col group"
+          aria-label="MDT Design + Build Home"
         >
-          <span className="font-mono text-xs font-bold px-1.5 py-0.5 border border-neutral-950 dark:border-white rounded-xs">
+          <span className="font-serif text-xl sm:text-2xl font-normal tracking-tight text-[#191816] dark:text-[#EFECE6] leading-none">
             MDT
           </span>
-          <span className="hidden sm:inline">Design + Build</span>
+          <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-[#A0633B] dark:text-[#C98858] mt-1">
+            Design + Build · Riverside
+          </span>
         </a>
 
-        {/* Center: Concise Navigation Links */}
-        <nav className="hidden md:flex items-center gap-8 text-[13px] font-medium text-neutral-600 dark:text-neutral-300">
+        {/* Center Editorial Links */}
+        <nav className="hidden md:flex items-center gap-10 text-[13px] font-sans font-light tracking-wide text-neutral-600 dark:text-neutral-400">
           <button
             onClick={() => scrollTo('services')}
             className="hover:text-neutral-950 dark:hover:text-white transition-colors cursor-pointer"
@@ -47,7 +44,7 @@ export default function DesktopNavbar({
             Our Work
           </button>
           <button
-            onClick={() => scrollTo('process')}
+            onClick={() => scrollTo('how-it-works')}
             className="hover:text-neutral-950 dark:hover:text-white transition-colors cursor-pointer"
           >
             How It Works
@@ -59,40 +56,79 @@ export default function DesktopNavbar({
             Our Story
           </button>
           <button
-            onClick={onOpenAreaModal}
-            className="hover:text-neutral-950 dark:hover:text-white transition-colors cursor-pointer flex items-center gap-1 font-mono text-xs"
+            onClick={() => scrollTo('contact')}
+            className="hover:text-neutral-950 dark:hover:text-white transition-colors cursor-pointer"
           >
-            <span>Service Areas</span>
-            <span className="text-[10px] text-neutral-400">▾</span>
+            Contact
           </button>
         </nav>
 
-        {/* Right: Phone, Theme Toggle & Single High-Contrast CTA */}
+        {/* Right Actions */}
         <div className="flex items-center gap-4">
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-xs border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white transition-colors cursor-pointer"
-            aria-label="Toggle dark/light mode"
+            className="p-2 text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors cursor-pointer"
+            aria-label="Toggle theme"
           >
-            {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            {theme === 'dark' ? <Sun className="w-4 h-4 text-[#C98858]" /> : <Moon className="w-4 h-4" />}
           </button>
-
-          <a
-            href={`tel:${COMPANY_INFO.phoneRaw}`}
-            className="hidden lg:inline text-xs font-mono text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white transition-colors"
-          >
-            {COMPANY_INFO.phone}
-          </a>
 
           <button
             onClick={() => onOpenProjectDrawer('Whole-Home Remodel')}
-            className="px-4 py-2 bg-neutral-950 hover:bg-neutral-800 text-white dark:bg-white dark:text-neutral-950 dark:hover:bg-neutral-200 text-xs font-medium tracking-wide transition-colors cursor-pointer flex items-center gap-1.5 rounded-xs shadow-xs"
+            className="px-5 py-2.5 bg-[#191816] hover:bg-[#A0633B] text-white dark:bg-[#EFECE6] dark:text-[#191816] dark:hover:bg-[#C98858] dark:hover:text-white text-xs font-mono uppercase tracking-wider rounded-xs transition-colors cursor-pointer flex items-center gap-2 shadow-xs"
           >
             <span>Start Your Project</span>
-            <span aria-hidden="true">↗</span>
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </button>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2 text-neutral-700 dark:text-neutral-300"
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
+
+      {/* Mobile Menu Dropdown */}
+      {mobileMenuOpen && (
+        <div className="md:hidden border-t border-[#E6DFD3] dark:border-[#242220] bg-[#F8F5EE] dark:bg-[#131211] px-6 py-8 space-y-4">
+          <nav className="flex flex-col space-y-4 font-serif text-xl text-neutral-900 dark:text-neutral-100">
+            <button
+              onClick={() => scrollTo('services')}
+              className="text-left hover:text-[#A0633B] transition-colors"
+            >
+              What We Build
+            </button>
+            <button
+              onClick={() => scrollTo('work')}
+              className="text-left hover:text-[#A0633B] transition-colors"
+            >
+              Our Work
+            </button>
+            <button
+              onClick={() => scrollTo('how-it-works')}
+              className="text-left hover:text-[#A0633B] transition-colors"
+            >
+              How It Works
+            </button>
+            <button
+              onClick={() => scrollTo('story')}
+              className="text-left hover:text-[#A0633B] transition-colors"
+            >
+              Our Story
+            </button>
+            <button
+              onClick={() => scrollTo('contact')}
+              className="text-left hover:text-[#A0633B] transition-colors"
+            >
+              Contact
+            </button>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }

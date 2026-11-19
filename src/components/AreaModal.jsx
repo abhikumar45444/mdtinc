@@ -51,7 +51,7 @@ export default function AreaModal({ isOpen, onClose, selectedArea, onSelectArea 
             </p>
             <h3
               id="area-modal-title"
-              className="text-xl font-semibold tracking-tight text-neutral-950 dark:text-white mt-1"
+              className="font-serif text-2xl font-normal tracking-tight text-neutral-950 dark:text-white mt-1"
             >
               Service Areas &amp; Build Hubs<span className="text-[#9E6B47]">.</span>
             </h3>

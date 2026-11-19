@@ -41,7 +41,7 @@ export default function CallModal({ isOpen, onClose }) {
             </p>
             <h3
               id="call-modal-title"
-              className="text-xl font-semibold tracking-tight text-neutral-950 dark:text-white mt-1"
+              className="font-serif text-2xl font-normal tracking-tight text-neutral-950 dark:text-white mt-1"
             >
               Call MDT Design + Build<span className="text-[#9E6B47]">.</span>
             </h3>
