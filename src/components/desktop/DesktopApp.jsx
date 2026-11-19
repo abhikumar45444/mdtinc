@@ -1,43 +1,71 @@
-import React from 'react';
+import React, { useState } from 'react';
 import DesktopNavbar from './DesktopNavbar';
 import DesktopHero from './DesktopHero';
 import DesktopServices from './DesktopServices';
+import WorkListShowcase from './WorkListShowcase';
 import DesktopProcess from './DesktopProcess';
-import DesktopProjects from './DesktopProjects';
+import DesktopTestimonials from './DesktopTestimonials';
 import DesktopAbout from './DesktopAbout';
 import DesktopFaq from './DesktopFaq';
 import DesktopContact from './DesktopContact';
 import DesktopFooter from './DesktopFooter';
+import GalleryLightbox from '../GalleryLightbox';
+import { PROJECTS } from '../../data/mdtData';
 
 export default function DesktopApp({ onOpenProjectDrawer }) {
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [activeProjectIndex, setActiveProjectIndex] = useState(0);
+
+  const handleSelectProject = (project) => {
+    const idx = PROJECTS.findIndex((p) => p.id === project.id);
+    setActiveProjectIndex(idx !== -1 ? idx : 0);
+    setLightboxOpen(true);
+  };
+
   return (
-    <div className="w-full min-h-screen bg-[#F8F5EE] dark:bg-[#131211] font-sans text-[#191816] dark:text-[#EFECE6] antialiased selection:bg-[#A0633B] selection:text-white transition-colors duration-200">
-      {/* 1. Architectural Header */}
+    <div className="w-full min-h-screen bg-[#F8F8F8] dark:bg-[#111111] font-sans text-[#111111] dark:text-[#FFFFFF] antialiased selection:bg-[#111111] selection:text-white dark:selection:bg-white dark:selection:text-black transition-colors duration-200">
+      {/* 1. Minimal Header with Rolling Dual-Layer Links */}
       <DesktopNavbar onOpenProjectDrawer={onOpenProjectDrawer} />
 
-      {/* 2. Asymmetric Editorial Hero */}
+      {/* 2. High-Impact Swiss Editorial Hero */}
       <DesktopHero onOpenProjectDrawer={onOpenProjectDrawer} />
 
-      {/* 3. What We Build (Asymmetric Editorial Lookbook) */}
+      {/* 3. Numbered Services Grid (01, 02, 03) */}
       <DesktopServices onOpenProjectDrawer={onOpenProjectDrawer} />
 
-      {/* 4. How It Works */}
+      {/* 4. Interactive Editorial Showcase & Work List with Pinned Preview */}
+      <WorkListShowcase onSelectProject={handleSelectProject} />
+
+      {/* 5. Structured Process (01, 02, 03) */}
       <DesktopProcess />
 
-      {/* 5. Our Work Portfolio */}
-      <DesktopProjects onOpenProjectDrawer={onOpenProjectDrawer} />
+      {/* 6. Minimalist Testimonials with Fractional Counter (01/03) */}
+      <DesktopTestimonials />
 
-      {/* 6. Our Story (Authentic Sister-Led Team) */}
+      {/* 7. Studio & Sister-Led Heritage */}
       <DesktopAbout />
 
-      {/* 7. Common Questions */}
+      {/* 8. Common Questions Accordion */}
       <DesktopFaq />
 
-      {/* 8. Contact & Scheduling */}
+      {/* 9. Closing Project CTA ("Do you have a project in mind?") */}
       <DesktopContact onOpenProjectDrawer={onOpenProjectDrawer} />
 
-      {/* 9. Minimal Footer */}
+      {/* 10. Architectural Footer with Live Clock & Giant Wordmark */}
       <DesktopFooter />
+
+      {/* Full-Viewport Photo Lightbox */}
+      <GalleryLightbox
+        isOpen={lightboxOpen}
+        onClose={() => setLightboxOpen(false)}
+        items={PROJECTS}
+        currentIndex={activeProjectIndex}
+        onIndexChange={setActiveProjectIndex}
+        onInquireProject={(preset) => {
+          setLightboxOpen(false);
+          onOpenProjectDrawer(preset);
+        }}
+      />
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ArrowUpRight } from 'lucide-react';
 import Reveal from '../Reveal';
 import { PROJECTS } from '../../data/mdtData';
 import GalleryLightbox from '../GalleryLightbox';
@@ -28,35 +29,37 @@ export default function DesktopProjects({ onOpenProjectDrawer }) {
   };
 
   return (
-    <section id="work" className="w-full bg-[#F8F5EE] dark:bg-[#131211] py-20 sm:py-32 border-b border-[#E6DFD3] dark:border-[#242220] transition-colors">
+    <section id="work" className="w-full bg-[#EAEAEA] dark:bg-[#121212] py-20 sm:py-32 border-b border-black/10 dark:border-white/10 transition-colors">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* Section Header */}
         <Reveal delay={0}>
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pb-12 border-b border-[#E6DFD3] dark:border-[#242220]">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pb-12 border-b border-black/10 dark:border-white/10">
             <div>
-              <p className="text-[11px] font-mono uppercase tracking-[0.22em] text-[#A0633B] dark:text-[#C98858] mb-3">
-                PORTFOLIO
-              </p>
-              <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-[#191816] dark:text-[#EFECE6]">
-                Homes we've designed and built<span className="text-[#A0633B]">.</span>
+              <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-neutral-600 dark:text-neutral-400 mb-3">
+                <span className="w-2 h-2 rounded-full bg-black dark:bg-white" />
+                <span>FEATURED RESIDENCES</span>
+              </div>
+              <h2 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-normal tracking-tight text-black dark:text-white">
+                Homes we've designed and built<span className="italic">.</span>
               </h2>
             </div>
+
             <p className="font-sans text-sm sm:text-base text-neutral-600 dark:text-neutral-400 font-light max-w-sm">
-              Every home is personal, intentional, and designed around how our clients live.
+              We design around the way you live, then bring every detail together to build it.
             </p>
           </div>
         </Reveal>
 
-        {/* Filter Pills */}
+        {/* Filter Pills (Komma Pill Style) */}
         <div className="flex flex-wrap items-center gap-2.5 py-10">
           {tags.map((t) => (
             <button
               key={t.id}
               onClick={() => setSelectedTag(t.id)}
-              className={`px-4 py-2 font-mono text-xs uppercase tracking-wider rounded-xs border transition-colors cursor-pointer ${
+              className={`px-4 py-2 font-mono text-xs uppercase tracking-wider rounded-full border transition-all cursor-pointer ${
                 selectedTag === t.id
-                  ? 'bg-[#191816] text-white border-[#191816] dark:bg-[#EFECE6] dark:text-[#191816] dark:border-[#EFECE6]'
-                  : 'bg-transparent text-neutral-600 dark:text-neutral-400 border-[#D8D0C2] dark:border-[#2E2C28] hover:border-[#A0633B]'
+                  ? 'bg-black text-white border-black dark:bg-white dark:text-black dark:border-white'
+                  : 'bg-transparent text-neutral-600 dark:text-neutral-400 border-black/15 dark:border-white/15 hover:border-black dark:hover:border-white'
               }`}
             >
               {t.label}
@@ -64,31 +67,34 @@ export default function DesktopProjects({ onOpenProjectDrawer }) {
           ))}
         </div>
 
-        {/* Curated Gallery Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
+        {/* Komma Editorial Project Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12">
           {filteredProjects.map((proj, idx) => (
-            <Reveal key={proj.id} delay={idx * 40}>
+            <Reveal key={proj.id} delay={idx * 50}>
               <div
                 onClick={() => openLightbox(proj)}
-                className="group cursor-pointer flex flex-col space-y-3"
+                className="group cursor-pointer flex flex-col space-y-4"
               >
-                <div className="relative h-72 w-full overflow-hidden rounded-xs bg-neutral-200 dark:bg-neutral-900 border border-[#E6DFD3] dark:border-[#242220]">
+                <div className="relative h-[360px] sm:h-[460px] w-full rounded-xl sm:rounded-2xl overflow-hidden bg-neutral-300 dark:bg-neutral-800 border border-black/10 dark:border-white/10">
                   <img
                     src={proj.image}
                     alt={proj.title}
-                    className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-700 ease-out"
+                    className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-1000 ease-out"
                     loading="lazy"
                   />
-                  <div className="absolute bottom-3 left-3 bg-black/60 backdrop-blur-xs text-white font-mono text-[9px] uppercase tracking-wider px-2.5 py-1 rounded-xs">
-                    {proj.location}
+                  <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90 dark:bg-black/90 backdrop-blur-md flex items-center justify-center text-black dark:text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                    <ArrowUpRight className="w-5 h-5" />
+                  </div>
+                  <div className="absolute bottom-4 left-4 font-mono text-[10px] uppercase tracking-wider text-white bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10">
+                    {proj.location} · {proj.tag}
                   </div>
                 </div>
 
                 <div className="space-y-1">
-                  <h3 className="font-serif text-xl font-normal text-[#191816] dark:text-[#EFECE6] group-hover:text-[#A0633B] dark:group-hover:text-[#C98858] transition-colors">
+                  <h3 className="font-serif text-2xl sm:text-3xl font-normal text-black dark:text-white group-hover:opacity-75 transition-opacity">
                     {proj.title}
                   </h3>
-                  <p className="font-sans text-xs text-neutral-600 dark:text-neutral-400 font-light leading-relaxed line-clamp-2">
+                  <p className="font-sans text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 font-light leading-relaxed line-clamp-2">
                     {proj.description}
                   </p>
                 </div>

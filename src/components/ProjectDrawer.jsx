@@ -112,25 +112,25 @@ export default function ProjectDrawer({
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="px-6 py-5 border-b border-neutral-200 dark:border-white/10 flex items-start justify-between bg-white dark:bg-[#121316]">
+        <div className="px-6 py-6 border-b border-black/10 dark:border-white/10 flex items-start justify-between bg-[#EAEAEA] dark:bg-[#121212]">
           <div>
-            <p className="text-[11px] font-mono uppercase tracking-[0.14em] text-neutral-500 dark:text-neutral-400">
+            <p className="text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-500 dark:text-neutral-400">
               START YOUR PROJECT / INTAKE
             </p>
             <h2
               id="project-drawer-title"
-              className="font-serif text-2xl font-normal tracking-tight text-neutral-950 dark:text-white mt-1"
+              className="font-serif text-3xl font-normal tracking-tight text-black dark:text-white mt-1"
             >
-              Tell us about your home<span className="text-[#9E6B47]">.</span>
+              Tell us about your home<span className="italic">.</span>
             </h2>
-            <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5 font-mono">
-              CSLB #1054266 &bull; Direct review by Martin &amp; The Mejia Team
+            <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1 font-mono">
+              CSLB #1054266 · Direct review by Martin &amp; The Mejia Team
             </p>
           </div>
 
           <button
             onClick={onClose}
-            className="p-2 -mr-2 text-neutral-400 hover:text-neutral-950 dark:hover:text-white transition-colors cursor-pointer rounded-xs"
+            className="p-2 -mr-2 text-neutral-500 hover:text-black dark:hover:text-white transition-colors cursor-pointer rounded-full"
             aria-label="Close Project Drawer"
           >
             <X className="w-5 h-5" />
